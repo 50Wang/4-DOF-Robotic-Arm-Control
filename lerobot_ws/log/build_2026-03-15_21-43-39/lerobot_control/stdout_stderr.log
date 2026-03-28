@@ -1,0 +1,35 @@
+running egg_info
+creating ../../build/lerobot_control/lerobot_control.egg-info
+writing ../../build/lerobot_control/lerobot_control.egg-info/PKG-INFO
+writing dependency_links to ../../build/lerobot_control/lerobot_control.egg-info/dependency_links.txt
+writing entry points to ../../build/lerobot_control/lerobot_control.egg-info/entry_points.txt
+writing requirements to ../../build/lerobot_control/lerobot_control.egg-info/requires.txt
+writing top-level names to ../../build/lerobot_control/lerobot_control.egg-info/top_level.txt
+writing manifest file '../../build/lerobot_control/lerobot_control.egg-info/SOURCES.txt'
+reading manifest file '../../build/lerobot_control/lerobot_control.egg-info/SOURCES.txt'
+writing manifest file '../../build/lerobot_control/lerobot_control.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/ubuntu2204/lerobot_ws/build/lerobot_control/build
+creating /home/ubuntu2204/lerobot_ws/build/lerobot_control/build/lib
+creating /home/ubuntu2204/lerobot_ws/build/lerobot_control/build/lib/lerobot_control
+copying lerobot_control/__init__.py -> /home/ubuntu2204/lerobot_ws/build/lerobot_control/build/lib/lerobot_control
+copying lerobot_control/lerobot.py -> /home/ubuntu2204/lerobot_ws/build/lerobot_control/build/lib/lerobot_control
+running install
+running install_lib
+creating /home/ubuntu2204/lerobot_ws/install/lerobot_control/lib/python3.10/site-packages/lerobot_control
+copying /home/ubuntu2204/lerobot_ws/build/lerobot_control/build/lib/lerobot_control/__init__.py -> /home/ubuntu2204/lerobot_ws/install/lerobot_control/lib/python3.10/site-packages/lerobot_control
+copying /home/ubuntu2204/lerobot_ws/build/lerobot_control/build/lib/lerobot_control/lerobot.py -> /home/ubuntu2204/lerobot_ws/install/lerobot_control/lib/python3.10/site-packages/lerobot_control
+byte-compiling /home/ubuntu2204/lerobot_ws/install/lerobot_control/lib/python3.10/site-packages/lerobot_control/__init__.py to __init__.cpython-310.pyc
+byte-compiling /home/ubuntu2204/lerobot_ws/install/lerobot_control/lib/python3.10/site-packages/lerobot_control/lerobot.py to lerobot.cpython-310.pyc
+running install_data
+creating /home/ubuntu2204/lerobot_ws/install/lerobot_control/share/ament_index
+creating /home/ubuntu2204/lerobot_ws/install/lerobot_control/share/ament_index/resource_index
+creating /home/ubuntu2204/lerobot_ws/install/lerobot_control/share/ament_index/resource_index/packages
+copying resource/lerobot_control -> /home/ubuntu2204/lerobot_ws/install/lerobot_control/share/ament_index/resource_index/packages
+copying package.xml -> /home/ubuntu2204/lerobot_ws/install/lerobot_control/share/lerobot_control
+running install_egg_info
+Copying ../../build/lerobot_control/lerobot_control.egg-info to /home/ubuntu2204/lerobot_ws/install/lerobot_control/lib/python3.10/site-packages/lerobot_control-0.0.0-py3.10.egg-info
+running install_scripts
+Installing lerobot script to /home/ubuntu2204/lerobot_ws/install/lerobot_control/lib/lerobot_control
+writing list of installed files to '/home/ubuntu2204/lerobot_ws/build/lerobot_control/install.log'

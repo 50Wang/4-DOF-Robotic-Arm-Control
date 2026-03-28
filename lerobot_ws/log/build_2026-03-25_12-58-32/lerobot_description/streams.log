@@ -1,0 +1,22 @@
+[0.219s] Invoking command in '/home/ubuntu2204/lerobot_ws/build/lerobot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/ubuntu2204/lerobot_ws/install/lerobot_control:/home/ubuntu2204/ws00_helloworld/install/pkg04_hellovscode_py:/home/ubuntu2204/ws00_helloworld/install/pkg02_helloworld_py:/opt/ros/humble /usr/bin/cmake --build /home/ubuntu2204/lerobot_ws/build/lerobot_description -- -j2 -l2
+[0.260s] Invoked command in '/home/ubuntu2204/lerobot_ws/build/lerobot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/ubuntu2204/lerobot_ws/install/lerobot_control:/home/ubuntu2204/ws00_helloworld/install/pkg04_hellovscode_py:/home/ubuntu2204/ws00_helloworld/install/pkg02_helloworld_py:/opt/ros/humble /usr/bin/cmake --build /home/ubuntu2204/lerobot_ws/build/lerobot_description -- -j2 -l2
+[0.266s] Invoking command in '/home/ubuntu2204/lerobot_ws/build/lerobot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/ubuntu2204/lerobot_ws/install/lerobot_control:/home/ubuntu2204/ws00_helloworld/install/pkg04_hellovscode_py:/home/ubuntu2204/ws00_helloworld/install/pkg02_helloworld_py:/opt/ros/humble /usr/bin/cmake --install /home/ubuntu2204/lerobot_ws/build/lerobot_description
+[0.271s] -- Install configuration: ""
+[0.271s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/urdf
+[0.271s] -- Installing: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/urdf/robot.urdf
+[0.271s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/ament_index/resource_index/package_run_dependencies/lerobot_description
+[0.271s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/ament_index/resource_index/parent_prefix_path/lerobot_description
+[0.271s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/environment/ament_prefix_path.sh
+[0.271s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/environment/ament_prefix_path.dsv
+[0.271s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/environment/path.sh
+[0.271s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/environment/path.dsv
+[0.271s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/local_setup.bash
+[0.271s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/local_setup.sh
+[0.271s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/local_setup.zsh
+[0.271s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/local_setup.dsv
+[0.271s] -- Installing: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/package.dsv
+[0.271s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/ament_index/resource_index/packages/lerobot_description
+[0.271s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/cmake/lerobot_descriptionConfig.cmake
+[0.271s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/cmake/lerobot_descriptionConfig-version.cmake
+[0.274s] -- Up-to-date: /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/package.xml
+[0.274s] Invoked command in '/home/ubuntu2204/lerobot_ws/build/lerobot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/ubuntu2204/lerobot_ws/install/lerobot_control:/home/ubuntu2204/ws00_helloworld/install/pkg04_hellovscode_py:/home/ubuntu2204/ws00_helloworld/install/pkg02_helloworld_py:/opt/ros/humble /usr/bin/cmake --install /home/ubuntu2204/lerobot_ws/build/lerobot_description

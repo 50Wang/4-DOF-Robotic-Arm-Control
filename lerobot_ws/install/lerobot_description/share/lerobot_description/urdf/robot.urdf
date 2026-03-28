@@ -1,0 +1,105 @@
+<robot name="lerobot">
+
+  <material name="gray"><color rgba="0.5 0.5 0.5 1.0"/></material>
+  <material name="green"><color rgba="0.0 0.8 0.0 1.0"/></material>
+  <material name="yellow"><color rgba="0.8 0.8 0.0 1.0"/></material>
+  <material name="red"><color rgba="0.8 0.0 0.0 1.0"/></material>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.11 0.11 0.06"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.11 0.11 0.06"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+    </collision>
+  </link>
+
+  <joint name="joint1" type="revolute">
+    <parent link="base_link"/>
+    <child link="dummy_link"/>
+    <origin xyz="0 0 0.025"/> 
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.1416" upper="3.1416" effort="10" velocity="1.0"/>
+  </joint>
+
+  <link name="dummy_link"/>
+
+  <joint name="joint2" type="revolute">
+    <parent link="dummy_link"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0"/> 
+    <axis xyz="0 1 0"/> <limit lower="-1.5708" upper="1.5708" effort="10" velocity="1.0"/>
+  </joint>
+
+  <link name="link1">
+    <visual>
+      <geometry>
+        <cylinder length="0.12" radius="0.0125"/>
+      </geometry>
+      <origin xyz="0 0 0.05"/>
+      <material name="green"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.12" radius="0.0125"/>
+      </geometry>
+      <origin xyz="0 0 0.05"/>
+    </collision>
+  </link>
+
+  <joint name="joint3" type="revolute">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin xyz="0 0 0.1"/> 
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.5708" upper="1.5708" effort="10" velocity="1.0"/>
+  </joint>
+
+  <link name="link2">
+    <visual>
+      <geometry>
+        <cylinder length="0.06" radius="0.0125"/>
+      </geometry>
+      <origin xyz="0 0 0.05"/>
+      <material name="yellow"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.06" radius="0.0125"/>
+      </geometry>
+      <origin xyz="0 0 0.05"/>
+    </collision>
+  </link>
+
+  <joint name="joint4" type="revolute">
+    <parent link="link2"/>
+    <child link="tool"/>
+    <origin xyz="0 0 0.1"/> 
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.7854" upper="0.7854" effort="10" velocity="1.0"/>
+  </joint>
+
+  <link name="tool">
+    <visual>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+      <material name="red"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.02"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+    </collision>
+  </link>
+
+</robot>

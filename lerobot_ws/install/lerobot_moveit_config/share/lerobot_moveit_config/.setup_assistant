@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: lerobot_description
+    relative_path: urdf/robot.urdf
+  srdf:
+    relative_path: config/lerobot.srdf
+  package_settings:
+    author_name: JackWang
+    author_email: wangyhswjtu2004@gmail.com
+    generated_timestamp: 1774511357

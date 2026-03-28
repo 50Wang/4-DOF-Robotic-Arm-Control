@@ -1,0 +1,16 @@
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/urdf/robot.urdf
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/ament_index/resource_index/package_run_dependencies/lerobot_description
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/ament_index/resource_index/parent_prefix_path/lerobot_description
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/environment/ament_prefix_path.sh
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/environment/ament_prefix_path.dsv
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/environment/path.sh
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/environment/path.dsv
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/local_setup.bash
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/local_setup.sh
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/local_setup.zsh
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/local_setup.dsv
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/package.dsv
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/ament_index/resource_index/packages/lerobot_description
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/cmake/lerobot_descriptionConfig.cmake
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/cmake/lerobot_descriptionConfig-version.cmake
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/package.xml

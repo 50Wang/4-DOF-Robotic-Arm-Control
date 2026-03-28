@@ -1,0 +1,23 @@
+[0.475s] Invoking command in '/home/ubuntu2204/lerobot_ws/src/lerobot_control': PYTHONPATH=/home/ubuntu2204/lerobot_ws/build/lerobot_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ubuntu2204/lerobot_ws/install/lerobot_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/lerobot_control build --build-base /home/ubuntu2204/lerobot_ws/build/lerobot_control/build install --record /home/ubuntu2204/lerobot_ws/build/lerobot_control/install.log --single-version-externally-managed install_data
+[0.666s] running egg_info
+[0.667s] writing ../../build/lerobot_control/lerobot_control.egg-info/PKG-INFO
+[0.668s] writing dependency_links to ../../build/lerobot_control/lerobot_control.egg-info/dependency_links.txt
+[0.668s] writing entry points to ../../build/lerobot_control/lerobot_control.egg-info/entry_points.txt
+[0.669s] writing requirements to ../../build/lerobot_control/lerobot_control.egg-info/requires.txt
+[0.670s] writing top-level names to ../../build/lerobot_control/lerobot_control.egg-info/top_level.txt
+[0.671s] reading manifest file '../../build/lerobot_control/lerobot_control.egg-info/SOURCES.txt'
+[0.672s] writing manifest file '../../build/lerobot_control/lerobot_control.egg-info/SOURCES.txt'
+[0.673s] running build
+[0.673s] running build_py
+[0.674s] running install
+[0.674s] running install_lib
+[0.675s] running install_data
+[0.675s] running install_egg_info
+[0.676s] removing '/home/ubuntu2204/lerobot_ws/install/lerobot_control/lib/python3.10/site-packages/lerobot_control-0.0.0-py3.10.egg-info' (and everything under it)
+[0.678s] Copying ../../build/lerobot_control/lerobot_control.egg-info to /home/ubuntu2204/lerobot_ws/install/lerobot_control/lib/python3.10/site-packages/lerobot_control-0.0.0-py3.10.egg-info
+[0.678s] running install_scripts
+[0.694s] Installing arm_planner script to /home/ubuntu2204/lerobot_ws/install/lerobot_control/lib/lerobot_control
+[0.694s] Installing lerobot script to /home/ubuntu2204/lerobot_ws/install/lerobot_control/lib/lerobot_control
+[0.695s] Installing trajectory_bridge script to /home/ubuntu2204/lerobot_ws/install/lerobot_control/lib/lerobot_control
+[0.695s] writing list of installed files to '/home/ubuntu2204/lerobot_ws/build/lerobot_control/install.log'
+[0.713s] Invoked command in '/home/ubuntu2204/lerobot_ws/src/lerobot_control' returned '0': PYTHONPATH=/home/ubuntu2204/lerobot_ws/build/lerobot_control/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ubuntu2204/lerobot_ws/install/lerobot_control/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/lerobot_control build --build-base /home/ubuntu2204/lerobot_ws/build/lerobot_control/build install --record /home/ubuntu2204/lerobot_ws/build/lerobot_control/install.log --single-version-externally-managed install_data
