@@ -5,7 +5,7 @@
 Keil MDK5, Ubuntu22.04 ROS2-Humble
 
 # Hardware硬件准备
-4轴机械臂(mg90系列舵机4个)、stm32f103c8t6控制板、面包板5/3.3V电源模块、USB转TTL模块/4-axis robotic arm (with 4 servo motors of mg90 series), STM32F103C8T6 control board, breadboard with 5/3.3V power module, USB to TTL module
+4轴机械臂(mg90系列舵机4个)、stm32f103c8t6控制板、面包板5/3.3V电源模块、USB转TTL模块、ST-LINK烧录器/4-axis robotic arm (with 4 servo motors of mg90 series), STM32F103C8T6 control board, breadboard with 5/3.3V power module, USB to TTL module, ST-LINK Programmer
 
 ![微信图片_20260329114157_420_14](https://github.com/user-attachments/assets/fb6517bf-6bf9-47b7-ae4e-cc6bc82d8776)
 
@@ -18,7 +18,20 @@ Keil MDK5, Ubuntu22.04 ROS2-Humble
 <img width="1128" height="426" alt="微信图片_20260329153403_424_14" src="https://github.com/user-attachments/assets/788669f9-1bba-46e6-b9ae-ca3d7d9eb36c" />
 
 # RobotArm
+该程序通过串口中断实时解析上位机发送的角度指令，并同步驱动四个PWM通道来实现对四自由度机械臂关节姿态的控制。
 连接stm32和stlink，在Keil中打开RobotArm文件夹，先后点击左上角的Rebuild和LOAD，将程序烧录进stm32，按下板上的RESET即可运行。
+
+# Joint control关节控制
+将USB转TTL模块连接电脑，打开虚拟机，在终端输入 ls /dev/tty* 查看是否有新的串口名称出现，sudo chmod 777 /dev/新串口名 赋予权限。 
+lerobot.py：ROS2串口通信驱动节点，通过订阅 arm_angle 话题获取机械臂的目标角度，并将ROS2的标准消息格式（Float32MultiArray）转换为Keil代码中定义的字符串格式
+
+先 ros2 run lerobot_control lerobot
+
+再打开另一个终端，输入：ros2 topic pub /arm_angle std_msgs/msg/Float32MultiArray "data: [20,20,20,20]" ，即手动发布一条包含关节角度的消息到订阅的话题中。
+
+https://github.com/user-attachments/assets/7c2b7e9f-0413-4353-8b65-9795d6ad3d6e
+
+
 
 
 
