@@ -8,3 +8,8 @@
 Keil MDK5, Ubuntu22.04 ROS2-Humble
 
 ![微信图片_20260329114157_420_14](https://github.com/user-attachments/assets/fb6517bf-6bf9-47b7-ae4e-cc6bc82d8776)
+
+![微信图片_20260329114212_421_14](https://github.com/user-attachments/assets/89d4ddaa-acd1-4e4e-bd43-7c2d9e93203a)
+
+# 电路连线
+将电源模块插到面包板上，跳线帽拨至5V。（！！注意后续连线5V和GND时，杜邦线端头要插到离电源模块较近的位置，以免无法供电）
