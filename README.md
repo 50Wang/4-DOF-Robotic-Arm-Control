@@ -11,13 +11,14 @@ Keil MDK5, Ubuntu22.04 ROS2-Humble
 
 ![微信图片_20260329114212_421_14](https://github.com/user-attachments/assets/89d4ddaa-acd1-4e4e-bd43-7c2d9e93203a)
 
-# 电路连线
+# Circuit connection电路连线
 将电源模块插到面包板上，跳线帽拨至5V。（！！注意后续连线5V和GND时，杜邦线端头要插到离电源模块较近的位置，以免无法供电）
 图2由下到上分别为关节舵机1-4 (PWM1-4)
 
 <img width="1128" height="426" alt="微信图片_20260329153403_424_14" src="https://github.com/user-attachments/assets/788669f9-1bba-46e6-b9ae-ca3d7d9eb36c" />
 
-
+# RobotArm
+连接stm32和stlink，在Keil中打开RobotArm文件夹，先后点击左上角的Rebuild和LOAD，将程序烧录进stm32，按下板上的RESET即可运行。
 
 
 
