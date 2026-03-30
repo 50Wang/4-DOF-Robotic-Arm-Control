@@ -45,5 +45,24 @@ arm_planner_node.py：通过逆运动学算法将目标三维坐标(x,y,z)实时
 
 https://github.com/user-attachments/assets/782b53f8-2bb5-40c7-a1e2-805091b85c0b
 
+# urdf simulation模型仿真
+具体仿真代码见robot.urdf  
+
+先加载urdf：ros2 run robot_state_publisher robot_state_publisher $(ros2 pkg prefix lerobot_description)/share/lerobot_description/urdf/robot.urdf
+
+打开另一个终端 ros2 run joint_state_publisher_gui joint_state_publisher_gui ，调出带滑动条的图形界面直观地控制机器人每一个关节的旋转角度；
+
+再打开另一个终端输入 rviz2 ，进入rviz
+
+
+
+<img width="330" height="375" alt="微信图片_20260330212110_432_14" src="https://github.com/user-attachments/assets/bdd3ac2a-bdd8-4afd-adf7-2a1229dc7da1" />
+
+
+
+
+
+
+
 
 
