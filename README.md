@@ -97,8 +97,15 @@ Author Information：输入英文名字和邮箱；
 
 Configuration Files：点击 Browse，在 src 目录下新建一个文件夹，命名为 lerobot_moveit_config，点击 Generate Package，提示 Package Generated Successfully! 后即可关闭窗口。
 
+！！完成Moveit2配置后，需要手动修改 src/lerobot_moveit_config/config/joint_limits.yaml。检查 joint1 到 joint4 的所有参数，只要是整数，全都加上 .0。
 
+完成上述操作后，重新编译 colcon build   source install/setup.bash
 
+ros2 launch lerobot_moveit_config demo.launch.py
+
+按住蓝色、红色、绿色的圆环进行拖动，接着在 Motion Planning 面板中点 Plan & Execute，完成动作规划。
+
+https://github.com/user-attachments/assets/6bc0ca83-ed8a-4fd8-a27b-32fb3ee7fe72
 
 
 
