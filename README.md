@@ -45,7 +45,7 @@ arm_planner_node.py：通过逆运动学算法将目标三维坐标(x,y,z)实时
 
 https://github.com/user-attachments/assets/782b53f8-2bb5-40c7-a1e2-805091b85c0b
 
-# urdf simulation模型仿真
+# URDF simulation模型仿真
 具体仿真代码见robot.urdf  
 
 先加载urdf：ros2 run robot_state_publisher robot_state_publisher $(ros2 pkg prefix lerobot_description)/share/lerobot_description/urdf/robot.urdf
@@ -61,6 +61,53 @@ https://github.com/user-attachments/assets/782b53f8-2bb5-40c7-a1e2-805091b85c0b
 拖动图形界面的滑动条可以控制对应关节运动。
 
 https://github.com/user-attachments/assets/2d2d651b-bc9f-4a81-8f11-6ce15b08ed78
+
+# Moveit2 configuration配置
+在终端输入 ros2 run moveit_setup_assistant moveit_setup_assistant
+
+<img width="1089" height="906" alt="微信图片_20260331132936_435_14" src="https://github.com/user-attachments/assets/d7f94637-afb5-483b-b7c5-31e606c20e7d" />
+
+点击Create New Moveit Configuration Package，打开Browse选择.urdf模型文件，点击Load Files加载；
+
+Self-Collisions：点击Generate Collision Matrix自动计算生成；
+
+Virtual Joints：Add Virtual Joint， Name->virtual_joint，Child->base_link，Parent->world，Type->Fixed；
+
+Planning Groups：把机械臂分成“手臂”和“夹爪”两组，分别进行路径规划
+
+Add Group， Group Name->arm，Kinematic Solver->kdl_kinematics_plugin/KDLKinematicsPlugin，Add Joints->按住 Ctrl 选入joint123，点击 > 把它们移到右侧，点击save
+
+Group Name->gripper，Add Joints选入joint4，点击 > 箭头把它们移到右侧，点击save；
+
+Robot Poses：预设回零动作 Add Pose， Pose Name->home，Planning Group->arm，将所有关节拖动到 0 的位置，点击save；
+
+End Effectors：Add End Effector， End Effector Name->hand，End Effector Group->gripper，Parent Link->link2（连接末端的最后一个连杆），Parent Group->arm，点击save；
+
+Passive Joints：跳过；
+
+ros2_control URDF Modification：点击底部的 Add Default Hardware Interfaces；
+
+ROS2 Controllers：点击 Auto Add FollowJointTrajectory Controllers for each Planning Group，自动生成 arm_controller 和 gripper_controller；
+
+MoveIt Controllers：点击 Setup Controller Manager，确保 arm_controller 出现在列表中；
+
+Perception：跳过；
+
+Author Information：输入英文名字和邮箱；
+
+Configuration Files：点击 Browse，在 src 目录下新建一个文件夹，命名为 lerobot_moveit_config，点击 Generate Package，提示 Package Generated Successfully! 后即可关闭窗口。
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
