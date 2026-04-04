@@ -43,6 +43,8 @@ ros2 run lerobot_control keyboard
 
 键盘输入对应字母即可实现关节控制。
 
+https://github.com/user-attachments/assets/6211f62a-29dc-4b07-8b06-4889fce41fb4
+
 # Point-to-point control点对点控制 
 arm_planner_node.py：通过逆运动学算法将目标三维坐标(x,y,z)实时解算为关节角度(theta1-theta4)，控制机械臂末端到达指定三维坐标
 
