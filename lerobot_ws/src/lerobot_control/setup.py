@@ -26,7 +26,8 @@ setup(
         'console_scripts': [
             'lerobot = lerobot_control.lerobot:main',
             'arm_planner = lerobot_control.arm_planner_node:main',
-            'trajectory_bridge = lerobot_control.trajectory_bridge:main'
+            'trajectory_bridge = lerobot_control.trajectory_bridge:main',
+            'keyboard = lerobot_control.keyboard:main'
         ],
     },
 )
