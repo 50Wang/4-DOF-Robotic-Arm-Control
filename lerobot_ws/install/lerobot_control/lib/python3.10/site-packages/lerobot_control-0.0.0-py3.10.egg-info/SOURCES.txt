@@ -10,6 +10,7 @@ setup.py
 ../../build/lerobot_control/lerobot_control.egg-info/zip-safe
 lerobot_control/__init__.py
 lerobot_control/arm_planner_node.py
+lerobot_control/keyboard.py
 lerobot_control/lerobot.py
 lerobot_control/trajectory_bridge.py
 resource/lerobot_control

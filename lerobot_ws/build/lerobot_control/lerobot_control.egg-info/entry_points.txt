@@ -1,5 +1,6 @@
 [console_scripts]
 arm_planner = lerobot_control.arm_planner_node:main
+keyboard = lerobot_control.keyboard:main
 lerobot = lerobot_control.lerobot:main
 trajectory_bridge = lerobot_control.trajectory_bridge:main
 

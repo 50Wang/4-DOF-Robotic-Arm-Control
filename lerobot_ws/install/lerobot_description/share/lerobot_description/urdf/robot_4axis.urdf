@@ -1,0 +1,214 @@
+<robot name="robot_4axis">
+
+  <!-- 材质定义 -->
+  <material name="dark_gray"><color rgba="0.2 0.2 0.2 1.0"/></material>
+  <material name="silver"><color rgba="0.75 0.75 0.75 1.0"/></material>
+  <material name="black"><color rgba="0.1 0.1 0.1 1.0"/></material>
+  <material name="light_gray"><color rgba="0.85 0.85 0.85 1.0"/></material>
+
+  <!-- ===================== -->
+  <!-- 底座：两层圆盘转台      -->
+  <!-- ===================== -->
+  <link name="base_link">
+    <!-- 下层圆盘（透明亚克力底板） -->
+    <visual>
+      <geometry>
+        <cylinder radius="0.075" length="0.008"/>
+      </geometry>
+      <origin xyz="0 0 -0.016"/>
+      <material name="light_gray"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.075" length="0.008"/>
+      </geometry>
+      <origin xyz="0 0 -0.016"/>
+    </collision>
+
+    <!-- 上层圆盘（金属转台） -->
+    <visual>
+      <geometry>
+        <cylinder radius="0.065" length="0.012"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.065" length="0.012"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+    </collision>
+  </link>
+
+  <!-- joint1：底座绕Z轴旋转（水平回转），范围±180° -->
+  <joint name="joint1" type="revolute">
+    <parent link="base_link"/>
+    <child link="shoulder_link"/>
+    <origin xyz="0 0 0.006"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.1416" upper="3.1416" effort="15" velocity="1.0"/>
+  </joint>
+
+  <!-- ===================== -->
+  <!-- 肩部：关节2的舵机座     -->
+  <!-- ===================== -->
+  <link name="shoulder_link">
+    <!-- 舵机壳体 -->
+    <visual>
+      <geometry>
+        <box size="0.04 0.038 0.055"/>
+      </geometry>
+      <origin xyz="0 0 0.027"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.04 0.038 0.055"/>
+      </geometry>
+      <origin xyz="0 0 0.027"/>
+    </collision>
+  </link>
+
+  <!-- joint2：大臂俯仰（绕Y轴），范围-90°~+90° -->
+  <joint name="joint2" type="revolute">
+    <parent link="shoulder_link"/>
+    <child link="upper_arm_link"/>
+    <origin xyz="0 0 0.054"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.5708" upper="1.5708" effort="15" velocity="1.0"/>
+  </joint>
+
+  <!-- ===================== -->
+  <!-- 大臂：较长的黑色连杆     -->
+  <!-- ===================== -->
+  <link name="upper_arm_link">
+    <!-- 大臂主杆 -->
+    <visual>
+      <geometry>
+        <box size="0.022 0.014 0.130"/>
+      </geometry>
+      <origin xyz="0 0 0.065"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.022 0.014 0.130"/>
+      </geometry>
+      <origin xyz="0 0 0.065"/>
+    </collision>
+
+    <!-- 中段舵机（关节3的驱动舵机，位于大臂上端） -->
+    <visual>
+      <geometry>
+        <box size="0.038 0.038 0.040"/>
+      </geometry>
+      <origin xyz="0 0 0.145"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.038 0.038 0.040"/>
+      </geometry>
+      <origin xyz="0 0 0.145"/>
+    </collision>
+  </link>
+
+  <!-- joint3：前臂俯仰（绕Y轴），范围-90°~+90° -->
+  <joint name="joint3" type="revolute">
+    <parent link="upper_arm_link"/>
+    <child link="forearm_link"/>
+    <origin xyz="0 0 0.165"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.5708" upper="1.5708" effort="10" velocity="1.0"/>
+  </joint>
+
+  <!-- ===================== -->
+  <!-- 前臂：较短的黑色连杆     -->
+  <!-- ===================== -->
+  <link name="forearm_link">
+    <!-- 前臂主杆 -->
+    <visual>
+      <geometry>
+        <box size="0.020 0.014 0.090"/>
+      </geometry>
+      <origin xyz="0 0 0.045"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.020 0.014 0.090"/>
+      </geometry>
+      <origin xyz="0 0 0.045"/>
+    </collision>
+
+    <!-- 末端关节4舵机座 -->
+    <visual>
+      <geometry>
+        <box size="0.032 0.032 0.032"/>
+      </geometry>
+      <origin xyz="0 0 0.096"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.032 0.032 0.032"/>
+      </geometry>
+      <origin xyz="0 0 0.096"/>
+    </collision>
+  </link>
+
+  <!-- joint4：末端夹爪姿态（绕Y轴），范围-90°~+90° -->
+  <joint name="joint4" type="revolute">
+    <parent link="forearm_link"/>
+    <child link="gripper_link"/>
+    <origin xyz="0 0 0.112"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.5708" upper="1.5708" effort="8" velocity="1.0"/>
+  </joint>
+
+  <!-- ===================== -->
+  <!-- 末端夹爪：方格笼状结构   -->
+  <!-- ===================== -->
+  <link name="gripper_link">
+    <!-- 夹爪主体框架（用box近似方格笼） -->
+    <visual>
+      <geometry>
+        <box size="0.095 0.075 0.060"/>
+      </geometry>
+      <origin xyz="0.03 0 0.02"/>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.095 0.075 0.060"/>
+      </geometry>
+      <origin xyz="0.03 0 0.02"/>
+    </collision>
+
+    <!-- 夹爪连接板（与前臂连接的部分） -->
+    <visual>
+      <geometry>
+        <box size="0.030 0.025 0.015"/>
+      </geometry>
+      <origin xyz="0 0 0.005"/>
+      <material name="dark_gray"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.030 0.025 0.015"/>
+      </geometry>
+      <origin xyz="0 0 0.005"/>
+    </collision>
+  </link>
+
+  <!-- 工具坐标系（TCP），位于夹爪末端中心 -->
+  <joint name="gripper_tcp_joint" type="fixed">
+    <parent link="gripper_link"/>
+    <child link="tcp_link"/>
+    <origin xyz="0.08 0 0.02"/>
+  </joint>
+
+  <link name="tcp_link"/>
+
+</robot>

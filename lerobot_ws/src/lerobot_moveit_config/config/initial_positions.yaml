@@ -1,7 +1,7 @@
-# Default initial positions for lerobot's ros2_control fake system
+# Default initial positions for robot's ros2_control fake system
 
 initial_positions:
+  gripper_left_finger_joint: 0
   joint1: 0
   joint2: 0
   joint3: 0
-  joint4: 0

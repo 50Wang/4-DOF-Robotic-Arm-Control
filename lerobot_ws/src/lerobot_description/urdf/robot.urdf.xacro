@@ -1,0 +1,339 @@
+<?xml version="1.0"?>
+<robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- =========================================== -->
+  <!--              全局尺寸参数定义                  -->
+  <!-- =========================================== -->
+
+  <!-- 底座 -->
+  <xacro:property name="base_lower_radius"   value="0.075"/>
+  <xacro:property name="base_lower_length"   value="0.008"/>
+  <xacro:property name="base_upper_radius"   value="0.065"/>
+  <xacro:property name="base_upper_length"   value="0.012"/>
+
+  <!-- 肩部舵机 -->
+  <xacro:property name="shoulder_size_x"     value="0.04"/>
+  <xacro:property name="shoulder_size_y"     value="0.038"/>
+  <xacro:property name="shoulder_size_z"     value="0.055"/>
+
+  <!-- 大臂 -->
+  <xacro:property name="upper_arm_x"         value="0.022"/>
+  <xacro:property name="upper_arm_y"         value="0.014"/>
+  <xacro:property name="upper_arm_z"         value="0.130"/>
+  <xacro:property name="elbow_servo_size"    value="0.038"/>
+  <xacro:property name="elbow_servo_z"       value="0.040"/>
+
+  <!-- 前臂 -->
+  <xacro:property name="forearm_x"           value="0.020"/>
+  <xacro:property name="forearm_y"           value="0.014"/>
+  <xacro:property name="forearm_z"           value="0.090"/>
+  <xacro:property name="wrist_servo_size"    value="0.032"/>
+
+  <!-- 夹爪底座 -->
+  <xacro:property name="gripper_body_x"      value="0.040"/>
+  <xacro:property name="gripper_body_y"      value="0.038"/>
+  <xacro:property name="gripper_body_z"      value="0.040"/>
+  <xacro:property name="gripper_bar_x"       value="0.015"/>
+  <xacro:property name="gripper_bar_y"       value="0.080"/>
+  <xacro:property name="gripper_bar_z"       value="0.015"/>
+
+  <!-- 指爪 -->
+  <xacro:property name="finger_seg1_x"       value="0.070"/>
+  <xacro:property name="finger_seg1_y"       value="0.010"/>
+  <xacro:property name="finger_seg1_z"       value="0.014"/>
+  <xacro:property name="finger_seg2_x"       value="0.045"/>
+  <xacro:property name="finger_seg2_y"       value="0.010"/>
+  <xacro:property name="finger_seg2_z"       value="0.014"/>
+  <xacro:property name="finger_seg2_rpy_z"   value="0.35"/>   <!-- 弧形弯曲角度(rad) -->
+  <xacro:property name="finger_spread_y"     value="0.035"/>  <!-- 指爪Y轴偏移 -->
+  <xacro:property name="finger_origin_x"     value="0.055"/>  <!-- 指爪关节X位置 -->
+  <xacro:property name="finger_limit"        value="0.6"/>    <!-- 关节限位(rad) -->
+
+  <!-- π（直接使用xacro内置的 ${pi}，无需重复定义） -->
+
+  <!-- =========================================== -->
+  <!--                材质定义                       -->
+  <!-- =========================================== -->
+  <material name="dark_gray"> <color rgba="0.2  0.2  0.2  1.0"/> </material>
+  <material name="silver">    <color rgba="0.75 0.75 0.75 1.0"/> </material>
+  <material name="black">     <color rgba="0.1  0.1  0.1  1.0"/> </material>
+  <material name="light_gray"><color rgba="0.85 0.85 0.85 1.0"/> </material>
+
+  <!-- =========================================== -->
+  <!--  宏：指爪 link（左右指共用，通过参数区分镜像）  -->
+  <!--  side: left / right                         -->
+  <!--  sign: +1(左) / -1(右)，控制弧形弯曲方向      -->
+  <!-- =========================================== -->
+  <xacro:macro name="finger_link" params="side sign">
+    <link name="gripper_${side}_finger_link">
+      <!-- 近端直段 -->
+      <visual>
+        <geometry>
+          <box size="${finger_seg1_x} ${finger_seg1_y} ${finger_seg1_z}"/>
+        </geometry>
+        <origin xyz="${finger_seg1_x/2} 0 0"/>
+        <material name="silver"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="${finger_seg1_x} ${finger_seg1_y} ${finger_seg1_z}"/>
+        </geometry>
+        <origin xyz="${finger_seg1_x/2} 0 0"/>
+      </collision>
+      <!-- 远端弧形段（绕Z轴倾斜模拟弧形） -->
+      <visual>
+        <geometry>
+          <box size="${finger_seg2_x} ${finger_seg2_y} ${finger_seg2_z}"/>
+        </geometry>
+        <origin xyz="${finger_seg1_x + finger_seg2_x*0.4} 0 0"
+                rpy="0 0 ${sign * finger_seg2_rpy_z}"/>
+        <material name="silver"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="${finger_seg2_x} ${finger_seg2_y} ${finger_seg2_z}"/>
+        </geometry>
+        <origin xyz="${finger_seg1_x + finger_seg2_x*0.4} 0 0"
+                rpy="0 0 ${sign * finger_seg2_rpy_z}"/>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <!-- =========================================== -->
+  <!--  宏：指爪 joint                              -->
+  <!--  side:       left / right                   -->
+  <!--  y_offset:   关节Y轴偏移（左负右正）          -->
+  <!--  lower/upper: 关节限位                       -->
+  <!--  mimic_mul:  mimic乘数（右指为-1）            -->
+  <!-- =========================================== -->
+  <xacro:macro name="finger_joint" params="side y_offset lower upper mimic_mul">
+    <joint name="gripper_${side}_finger_joint" type="revolute">
+      <parent link="gripper_base_link"/>
+      <child  link="gripper_${side}_finger_link"/>
+      <origin xyz="${finger_origin_x} ${y_offset} 0" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
+      <xacro:if value="${side == 'right'}">
+        <mimic joint="gripper_left_finger_joint"
+               multiplier="${mimic_mul}" offset="0.0"/>
+      </xacro:if>
+      <limit lower="${lower}" upper="${upper}"
+             effort="10" velocity="1.0"/>
+    </joint>
+  </xacro:macro>
+
+
+  <!-- =========================================== -->
+  <!--          机器人本体结构                        -->
+  <!-- =========================================== -->
+
+  <!-- ── 底座 ── -->
+  <link name="base_link">
+    <!-- 下层亚克力圆盘 -->
+    <visual>
+      <geometry>
+        <cylinder radius="${base_lower_radius}" length="${base_lower_length}"/>
+      </geometry>
+      <origin xyz="0 0 -0.016"/>
+      <material name="light_gray"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${base_lower_radius}" length="${base_lower_length}"/>
+      </geometry>
+      <origin xyz="0 0 -0.016"/>
+    </collision>
+    <!-- 上层金属转台 -->
+    <visual>
+      <geometry>
+        <cylinder radius="${base_upper_radius}" length="${base_upper_length}"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${base_upper_radius}" length="${base_upper_length}"/>
+      </geometry>
+      <origin xyz="0 0 0"/>
+    </collision>
+  </link>
+
+  <!-- joint1：底座绕Z轴旋转（水平回转）±180° -->
+  <joint name="joint1" type="revolute">
+    <parent link="base_link"/>
+    <child  link="shoulder_link"/>
+    <origin xyz="0 0 0.006"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="${-pi}" upper="${pi}" effort="15" velocity="1.0"/>
+  </joint>
+
+  <!-- ── 肩部舵机座 ── -->
+  <link name="shoulder_link">
+    <visual>
+      <geometry>
+        <box size="${shoulder_size_x} ${shoulder_size_y} ${shoulder_size_z}"/>
+      </geometry>
+      <origin xyz="0 0 ${shoulder_size_z/2}"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${shoulder_size_x} ${shoulder_size_y} ${shoulder_size_z}"/>
+      </geometry>
+      <origin xyz="0 0 ${shoulder_size_z/2}"/>
+    </collision>
+  </link>
+
+  <!-- joint2：大臂俯仰（绕Y轴）±90° -->
+  <joint name="joint2" type="revolute">
+    <parent link="shoulder_link"/>
+    <child  link="upper_arm_link"/>
+    <origin xyz="0 0 0.054"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="${-pi/2}" upper="${pi/2}" effort="15" velocity="1.0"/>
+  </joint>
+
+  <!-- ── 大臂 ── -->
+  <link name="upper_arm_link">
+    <!-- 主杆 -->
+    <visual>
+      <geometry>
+        <box size="${upper_arm_x} ${upper_arm_y} ${upper_arm_z}"/>
+      </geometry>
+      <origin xyz="0 0 ${upper_arm_z/2}"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${upper_arm_x} ${upper_arm_y} ${upper_arm_z}"/>
+      </geometry>
+      <origin xyz="0 0 ${upper_arm_z/2}"/>
+    </collision>
+    <!-- 肘部舵机 -->
+    <visual>
+      <geometry>
+        <box size="${elbow_servo_size} ${elbow_servo_size} ${elbow_servo_z}"/>
+      </geometry>
+      <origin xyz="0 0 0.145"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${elbow_servo_size} ${elbow_servo_size} ${elbow_servo_z}"/>
+      </geometry>
+      <origin xyz="0 0 0.145"/>
+    </collision>
+  </link>
+
+  <!-- joint3：前臂俯仰（绕Y轴）±90° -->
+  <joint name="joint3" type="revolute">
+    <parent link="upper_arm_link"/>
+    <child  link="forearm_link"/>
+    <origin xyz="0 0 0.165"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="${-pi/2}" upper="${pi/2}" effort="10" velocity="1.0"/>
+  </joint>
+
+  <!-- ── 前臂 ── -->
+  <link name="forearm_link">
+    <!-- 主杆 -->
+    <visual>
+      <geometry>
+        <box size="${forearm_x} ${forearm_y} ${forearm_z}"/>
+      </geometry>
+      <origin xyz="0 0 ${forearm_z/2}"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${forearm_x} ${forearm_y} ${forearm_z}"/>
+      </geometry>
+      <origin xyz="0 0 ${forearm_z/2}"/>
+    </collision>
+    <!-- 腕部舵机座 -->
+    <visual>
+      <geometry>
+        <box size="${wrist_servo_size} ${wrist_servo_size} ${wrist_servo_size}"/>
+      </geometry>
+      <origin xyz="0 0 0.096"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${wrist_servo_size} ${wrist_servo_size} ${wrist_servo_size}"/>
+      </geometry>
+      <origin xyz="0 0 0.096"/>
+    </collision>
+  </link>
+
+  <!-- ── joint4：前臂末端 → 夹爪底座（固定，带旋转）──
+  <joint name="joint4" type="fixed">
+    <parent link="forearm_link"/>
+    <child  link="gripper_base_link"/>
+    <origin xyz="0 0 0.112" rpy="0 ${-pi/2} 0"/>
+  </joint> -->
+
+<!-- joint4：腕部，给一个极小范围让MoveIt识别为可动关节 -->
+<joint name="joint4" type="revolute">
+  <parent link="forearm_link"/>
+  <child link="gripper_base_link"/>
+  <origin xyz="0 0 0.112" rpy="0 -1.5708 0"/>
+  <axis xyz="0 1 0"/>
+  <limit lower="-1.5708" upper="1.5708" effort="8" velocity="1.0"/>
+</joint>
+
+  <!-- ── 夹爪底座 ── -->
+  <link name="gripper_base_link">
+    <!-- 舵机壳体 -->
+    <visual>
+      <geometry>
+        <box size="${gripper_body_x} ${gripper_body_y} ${gripper_body_z}"/>
+      </geometry>
+      <origin xyz="0.020 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${gripper_body_x} ${gripper_body_y} ${gripper_body_z}"/>
+      </geometry>
+      <origin xyz="0.020 0 0"/>
+    </collision>
+    <!-- 横向安装板 -->
+    <visual>
+      <geometry>
+        <box size="${gripper_bar_x} ${gripper_bar_y} ${gripper_bar_z}"/>
+      </geometry>
+      <origin xyz="0.055 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${gripper_bar_x} ${gripper_bar_y} ${gripper_bar_z}"/>
+      </geometry>
+      <origin xyz="0.055 0 0"/>
+    </collision>
+  </link>
+
+  <!-- ── 左指爪（主动）：sign=+1 弧形向上弯 ── -->
+  <xacro:finger_link side="left"  sign="1"/>
+  <xacro:finger_joint side="left"
+                      y_offset="${-finger_spread_y}"
+                      lower="${-finger_limit}" upper="0.0"
+                      mimic_mul="0"/>
+
+  <!-- ── 右指爪（从动 mimic）：sign=-1 弧形向下弯 ── -->
+  <xacro:finger_link side="right" sign="-1"/>
+  <xacro:finger_joint side="right"
+                      y_offset="${finger_spread_y}"
+                      lower="0.0" upper="${finger_limit}"
+                      mimic_mul="-1.0"/>
+
+  <!-- ── TCP 工具点 ── -->
+  <joint name="gripper_tcp_joint" type="fixed">
+    <parent link="gripper_base_link"/>
+    <child  link="tcp_link"/>
+    <origin xyz="0.110 0 0"/>
+  </joint>
+  <link name="tcp_link"/>
+
+</robot>

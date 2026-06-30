@@ -23,13 +23,12 @@
 /home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/launch/moveit_rviz.launch.py
 /home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/config/joint_limits.yaml
 /home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/config/ros2_controllers.yaml
-/home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/config/lerobot.srdf
 /home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/config/moveit.rviz
-/home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/config/lerobot.urdf.xacro
+/home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/config/robot.urdf.xacro
 /home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/config/pilz_cartesian_limits.yaml
 /home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/config/initial_positions.yaml
-/home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/config/lerobot.ros2_control.xacro
-/home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/config/sensors_3d.yaml
+/home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/config/robot.ros2_control.xacro
+/home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/config/robot.srdf
 /home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/config/moveit_controllers.yaml
 /home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/config/kinematics.yaml
 /home/ubuntu2204/lerobot_ws/install/lerobot_moveit_config/share/lerobot_moveit_config/.setup_assistant

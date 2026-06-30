@@ -128,7 +128,7 @@ def main():
     # 示例目标点（你可以改）
     time.sleep(2)
 
-    node.pick(0.0, 0.0, 0.2)
+    node.pick(0.0, 0.0, 0.0)
 
     rclpy.spin(node)
 

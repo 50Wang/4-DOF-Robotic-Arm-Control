@@ -1,3 +1,6 @@
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/launch/display.launch.xml
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/rviz/urdf_config.rviz
+/home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/urdf/robot.urdf.xacro
 /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/lerobot_description/urdf/robot.urdf
 /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/ament_index/resource_index/package_run_dependencies/lerobot_description
 /home/ubuntu2204/lerobot_ws/install/lerobot_description/share/ament_index/resource_index/parent_prefix_path/lerobot_description

@@ -1,10 +1,23 @@
 moveit_setup_assistant_config:
   urdf:
     package: lerobot_description
-    relative_path: urdf/robot.urdf
+    relative_path: urdf/robot.urdf.xacro
   srdf:
-    relative_path: config/lerobot.srdf
+    relative_path: config/robot.srdf
   package_settings:
-    author_name: JackWang
-    author_email: wangyhswjtu2004@gmail.com
-    generated_timestamp: 1774511357
+    author_name: dodo
+    author_email: dodo@dodo.com
+    generated_timestamp: 1782399533
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position

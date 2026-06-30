@@ -13,7 +13,13 @@ moveit_simple_controller_manager:
       - joint1
       - joint2
       - joint3
+      - joint4
+    action_ns: follow_joint_trajectory
+    default: true
+    
   gripper_controller:
     type: FollowJointTrajectory
     joints:
-      - joint4
+      - gripper_left_finger_joint
+    action_ns: follow_joint_trajectory
+    default: true

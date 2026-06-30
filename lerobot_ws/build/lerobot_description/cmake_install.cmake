@@ -43,7 +43,11 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/lerobot_description" TYPE DIRECTORY FILES "/home/ubuntu2204/lerobot_ws/src/lerobot_description/urdf")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/lerobot_description" TYPE DIRECTORY FILES
+    "/home/ubuntu2204/lerobot_ws/src/lerobot_description/launch"
+    "/home/ubuntu2204/lerobot_ws/src/lerobot_description/rviz"
+    "/home/ubuntu2204/lerobot_ws/src/lerobot_description/urdf"
+    )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
