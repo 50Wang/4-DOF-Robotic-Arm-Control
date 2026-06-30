@@ -57,19 +57,13 @@ arm_planner_node.py：通过逆运动学算法将目标三维坐标(x,y,z)实时
 https://github.com/user-attachments/assets/782b53f8-2bb5-40c7-a1e2-805091b85c0b
 
 # URDF simulation模型仿真
-具体仿真代码见robot.urdf  
+具体模型仿真代码见robot.urdf  
 
-先加载urdf：ros2 run robot_state_publisher robot_state_publisher $(ros2 pkg prefix lerobot_description)/share/lerobot_description/urdf/robot.urdf
+运行模型启动文件 ros2 launch lerobot_description display.launch.xml ，其中包含robot_state_publisher、joint_state_publisher_gui和rviz2
 
-打开另一个终端 ros2 run joint_state_publisher_gui joint_state_publisher_gui ，出现带滑动条的图形界面可直观控制机器人每一个关节的旋转角度；
+<img width="1350" height="1086" alt="image" src="https://github.com/user-attachments/assets/41b7eeba-afdf-4cb4-a593-42df5695c467" />
 
-再打开另一个终端输入 rviz2 ，进入rviz
-
-点击左下角Add，选择RobotModel后点OK。接下来将Fixed Frame由map改为base_link，RobotModel中的Description Topic选择/robot_description，即可看见4轴机械臂模型。
-
-<img width="330" height="375" alt="微信图片_20260330212110_432_14" src="https://github.com/user-attachments/assets/bdd3ac2a-bdd8-4afd-adf7-2a1229dc7da1" />
-
-拖动图形界面的滑动条可以控制对应关节运动。
+拖动图形界面的滑动条控制对应关节运动。
 
 https://github.com/user-attachments/assets/2d2d651b-bc9f-4a81-8f11-6ce15b08ed78
 
