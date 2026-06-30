@@ -106,15 +106,20 @@ Configuration Files：点击 Browse，在 src 目录下新建一个文件夹，�
 
 <img width="459" height="543" alt="image" src="https://github.com/user-attachments/assets/670287ab-c449-4aec-bb7c-2f5169ed8eb1" />
 
+进入 moveit_controllers.yaml，添加：
+    action_ns: follow_joint_trajectory
+    default: true
+
+<img width="807" height="519" alt="image" src="https://github.com/user-attachments/assets/90b3360c-ba52-4832-9259-defd4f7eb36b" />
+
 完成上述操作后，重新编译 colcon build   
 
 source install/setup.bash
 
 ros2 launch lerobot_moveit_config demo.launch.py
 
-按住蓝色、红色、绿色的圆环进行拖动，接着在 Motion Planning 面板中点 Plan & Execute，完成动作规划。
+按住三色圆环进行拖动，接着在 Motion Planning 面板中点 Plan & Execute，完成动作规划。
 
-https://github.com/user-attachments/assets/6bc0ca83-ed8a-4fd8-a27b-32fb3ee7fe72
 
 
 
