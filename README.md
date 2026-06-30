@@ -120,6 +120,10 @@ ros2 launch lerobot_moveit_config demo.launch.py
 
 按住三色圆环进行拖动，接着在 Motion Planning 面板中点 Plan & Execute，完成动作规划。
 
+https://github.com/user-attachments/assets/3f555a1e-145d-4869-8ee3-aa78422e976c
+
+
+
 
 
 
