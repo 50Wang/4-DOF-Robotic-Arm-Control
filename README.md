@@ -59,42 +59,42 @@ https://github.com/user-attachments/assets/782b53f8-2bb5-40c7-a1e2-805091b85c0b
 # URDF simulation模型仿真
 具体模型仿真代码见robot.urdf  
 
-运行模型启动文件 ros2 launch lerobot_description display.launch.xml ，其中包含robot_state_publisher、joint_state_publisher_gui和rviz2
+运行模型启动文件 ros2 launch lerobot_description display.launch.xml ，其中包含robot_state_publisher、joint_state_publisher_gui和rviz2，拖动图形界面的滑动条控制对应关节运动。
 
-<img width="1350" height="1086" alt="image" src="https://github.com/user-attachments/assets/41b7eeba-afdf-4cb4-a593-42df5695c467" />
-
-拖动图形界面的滑动条控制对应关节运动。
-
-https://github.com/user-attachments/assets/2d2d651b-bc9f-4a81-8f11-6ce15b08ed78
+<img width="1200" height="1062" alt="image" src="https://github.com/user-attachments/assets/52e2b735-8241-4ff7-81e2-56dd47fac1ae" />
 
 # Moveit2 configuration配置
 在终端输入 ros2 run moveit_setup_assistant moveit_setup_assistant
 
 <img width="1089" height="906" alt="微信图片_20260331132936_435_14" src="https://github.com/user-attachments/assets/d7f94637-afb5-483b-b7c5-31e606c20e7d" />
 
-点击Create New Moveit Configuration Package，打开Browse选择.urdf模型文件，点击Load Files加载；
+点击Create New Moveit Configuration Package，打开Browse选择robot.urdf.xacro模型文件，点击Load Files加载；
 
 Self-Collisions：点击Generate Collision Matrix自动计算生成；
 
-Virtual Joints：Add Virtual Joint， Name->virtual_joint，Child->base_link，Parent->world，Type->Fixed；
+Virtual Joints：Add Virtual Joint，Name->virtual_joint，Child->base_link，Parent->world，Type->Fixed；
 
-Planning Groups：把机械臂分成“手臂”和“夹爪”两组，分别进行路径规划
+Planning Groups：把机械臂分成“arm”和“gripper”两组，分别进行规划
 
-Add Group， Group Name->arm，Kinematic Solver->kdl_kinematics_plugin/KDLKinematicsPlugin，Add Joints->按住 Ctrl 选入joint123，点击 > 把它们移到右侧，点击save
+Add Group，Group Name->arm，Kinematic Solver->kdl_kinematics_plugin/KDLKinematicsPlugin，Add Joints->按住 Ctrl 选入joint123，点击 > 把它们移到右侧，点击save
 
-Group Name->gripper，Add Joints选入joint4，点击 > 箭头把它们移到右侧，点击save；
+Group Name->gripper，Add Joints选入gripper_left/right_finger_joint，点击 > 箭头把它们移到右侧，点击save；
 
-Robot Poses：预设回零动作 Add Pose， Pose Name->home，Planning Group->arm，将所有关节拖动到 0 的位置，点击save；
+<img width="564" height="555" alt="image" src="https://github.com/user-attachments/assets/db48ef94-de3f-4c75-95c0-de06dd6d8005" />
 
-End Effectors：Add End Effector， End Effector Name->hand，End Effector Group->gripper，Parent Link->link2（连接末端的最后一个连杆），Parent Group->arm，点击save；
+Robot Poses：预设回零动作 Add Pose， Pose Name->home，Planning Group->arm，将所有关节拖动到 0 的位置，点击save，还可以预设如图的其余动作角度；
+
+<img width="522" height="351" alt="image" src="https://github.com/user-attachments/assets/0cb96947-fdf6-4632-bbc7-71758905f084" />
+
+End Effectors：Add End Effector，End Effector Name->gripper，End Effector Group->gripper，Parent Link->gripper_base_link（连接末端的最后一个连杆），Parent Group->arm，点击save；
 
 Passive Joints：跳过；
 
-ros2_control URDF Modification：点击底部的 Add Default Hardware Interfaces；
+ros2_control URDF Modification：点击 Add Interfaces；
 
 ROS2 Controllers：点击 Auto Add FollowJointTrajectory Controllers for each Planning Group，自动生成 arm_controller 和 gripper_controller；
 
-MoveIt Controllers：点击 Setup Controller Manager，确保 arm_controller 出现在列表中；
+MoveIt Controllers：点击 Setup Controller Manager，确保 arm_controller 和 gripper_controller出现在列表中；
 
 Perception：跳过；
 
@@ -102,7 +102,9 @@ Author Information：输入英文名字和邮箱；
 
 Configuration Files：点击 Browse，在 src 目录下新建一个文件夹，命名为 lerobot_moveit_config，点击 Generate Package，提示 Package Generated Successfully! 后即可关闭窗口。
 
-！！完成Moveit2配置后，需要手动修改 src/lerobot_moveit_config/config/joint_limits.yaml。检查 joint1 到 joint4 的所有参数，只要是整数，全都加上 .0。
+！！完成Moveit2配置后，需要手动修改 src/lerobot_moveit_config/config/joint_limits.yaml。检查 joint1 到 joint4 的所有参数，只要是整数，全都加上 .0
+
+<img width="459" height="543" alt="image" src="https://github.com/user-attachments/assets/670287ab-c449-4aec-bb7c-2f5169ed8eb1" />
 
 完成上述操作后，重新编译 colcon build   
 
